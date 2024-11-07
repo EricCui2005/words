@@ -6,11 +6,23 @@ export default function Home() {
 
   // Tracking the status of the word
   const [wordMovedUp, setMovedUp] = useState(false)
+  const [wordData, setData] = useState(null)
 
-  // Debugging
   useEffect(() => {
-    console.log(wordMovedUp)
-  }, [wordMovedUp])
+    async function fetchData() {
+      try {
+        const response = await fetch("https://www.dictionaryapi.com/api/v3/references/collegiate/json/voluminous?key=6c1313af-ca6f-4a19-8443-6f49470c0e0d");
+        const result = await response.json();
+        setData(result)
+      }
+      catch (error) {
+        console.error("Error fetching data: ", error)
+      }
+    }
+    fetchData();
+  }, [])
+
+  console.log(wordData);
 
   useEffect(() => {
 
