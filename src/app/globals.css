@@ -2,11 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-* {
-  border: 1px solid blue;
-}
+/* Debugging CSS */
+/* * {
+  border: 1px solid red;
+} */
