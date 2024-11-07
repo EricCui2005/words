@@ -5,13 +5,18 @@ import { useState, useEffect } from "react"
 export default function Home() {
 
   // Tracking the status of the word
-  const [movedUp, setMovedUp] = useState(false)
+  const [wordMovedUp, setMovedUp] = useState(false)
+
+  // Debugging
+  useEffect(() => {
+    console.log(wordMovedUp)
+  }, [wordMovedUp])
 
   useEffect(() => {
 
     // Word transition logic
     const wordTransition = () => {
-      setMovedUp(!movedUp);
+      setMovedUp(!wordMovedUp);
     }
 
     // Adding an event listener to detect a click anywhere on the document
@@ -21,16 +26,16 @@ export default function Home() {
     return () => {
       document.removeEventListener('click', wordTransition)
     };
-  }, [movedUp])
+  }, [wordMovedUp])
 
   return (
     <>
       <div className="h-screen flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center gap-8">
-            <div className={`text-white text-7xl font-bold italic ${movedUp ? '-translate-y-6 duration-500' : 'translate-y-0 duration-500'}`}>Test</div>
-            <p className="text-white text-4xl">
+            <div className={`text-white text-7xl font-bold italic ${wordMovedUp ? '-translate-y-6 duration-1000' : 'translate-y-16 duration-1000'}`}>Test</div>
+            <p className={`text-white text-4xl -translate-y-10 transition-opacity duration-700 ${wordMovedUp ? 'opacity-100' : 'opacity-0'}`}>
               1. Emitting light <br></br>
-              2. Emitting light 
+              2. Intensely passionate 
             </p>
         </div>
       </div>
