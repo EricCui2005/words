@@ -63,7 +63,7 @@ export default function Home() {
               {wordData ? wordData[0].meta.id : "Loading..."}
             </div>
             {definitionData ? 
-              definitionData.map((defData: unknown, index: unknown) => 
+              definitionData.map((defData, index) => 
               <p key={defData.id} className={`text-white text-3xl -translate-y-10 transition-opacity duration-700 ${wordMovedUp ? 'opacity-100' : 'opacity-0'}`}>
                 {`${index + 1}. ${defData.def}`}
               </p>) 
