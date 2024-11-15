@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import Word from "../components/word";
 
 export default function Home() {
 
@@ -39,6 +40,7 @@ export default function Home() {
     fetchData();
   }, [])
 
+  // Adds a new listener each time with new word wordMovedUp state
   useEffect(() => {
 
     // Word transition logic
@@ -59,9 +61,7 @@ export default function Home() {
     <>
       <div className="h-screen flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center gap-8">
-            <div className={`text-white text-7xl font-bold italic ${wordMovedUp ? '-translate-y-6 duration-1000' : 'translate-y-16 duration-1000'}`}>
-              {wordData ? wordData[0]?.meta?.id : "Loading..."}
-            </div>
+            <Word word={wordData ? wordData[0]?.meta?.id : "Loading..."} moved={wordMovedUp}/>
             {definitionData ? 
               definitionData.map((defData: any, index: any) => 
               <p key={defData.id} className={`text-white text-3xl -translate-y-10 transition-opacity duration-700 ${wordMovedUp ? 'opacity-100' : 'opacity-0'}`}>
