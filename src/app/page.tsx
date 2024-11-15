@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from "react";
-import Word from "../components/word";
+import { useState, useEffect } from "react"
+import Word from "../components/word"
+import Definition from "../components/definition"
 
 export default function Home() {
 
@@ -62,12 +63,7 @@ export default function Home() {
       <div className="h-screen flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center gap-8">
             <Word word={wordData ? wordData[0]?.meta?.id : "Loading..."} moved={wordMovedUp}/>
-            {definitionData ? 
-              definitionData.map((defData: any, index: any) => 
-              <p key={defData.id} className={`text-white text-3xl -translate-y-10 transition-opacity duration-700 ${wordMovedUp ? 'opacity-100' : 'opacity-0'}`}>
-                {`${index + 1}. ${defData.def}`}
-              </p>) 
-              : ""}
+            <Definition definitions={definitionData ? definitionData : []} wordMoved={wordMovedUp}/>
         </div>
       </div>
     </>
