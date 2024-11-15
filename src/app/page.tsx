@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react"
 import Word from "@/components/word"
 import Definition from "@/components/definition"
-import fetchWordData from "@/utility/utility"
+import fetchWordData from "@/utility/wordFetch"
+import { WordData } from "@/utility/types"
 
 export default function Home() {
 
   // Tracking the status of the word
   const [wordMovedUp, setMovedUp] = useState(false)
-  const [wordData, setData] = useState()
+  const [wordData, setData] = useState<[WordData]>()
   const [definitionData, setDefinitionData] = useState()
 
   // Fetching word data once on component mount
