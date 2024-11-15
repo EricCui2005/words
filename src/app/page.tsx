@@ -9,8 +9,8 @@ export default function Home() {
 
   // Tracking the status of the word
   const [wordMovedUp, setMovedUp] = useState(false)
-  const [wordData, setData] = useState<any[]>()
-  const [definitionData, setDefinitionData] = useState<any>()
+  const [wordData, setData] = useState()
+  const [definitionData, setDefinitionData] = useState()
 
   // Fetching word data once on component mount
   // Empty dependency array ensures data is fetched only once
