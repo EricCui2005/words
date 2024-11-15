@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import Word from "../components/word"
-import Definition from "../components/definition"
+import Word from "@/components/word"
+import Definition from "@/components/definition"
+import fetchWordData from "@/utility/utility"
 
 export default function Home() {
 
@@ -16,23 +17,12 @@ export default function Home() {
   // on component mount
   useEffect(() => {
 
-    // Function to asynchronously hit the dictionary API
-    async function fetchData() {
+    // Wrapping utility word data fetching function in async function
+    const fetchData = async () => {
       try {
-        const response = await fetch("api/definition?word=voluminous");
-        const result = await response.json();
-        setData(result)
-
-        // Logging
-        console.log(`Query: ${JSON.stringify(result)}`)
-
-        // Mapping over definition data to add IDs to each
-        const defsWithIds = result[0].shortdef.map((definition: unknown, index: unknown) => ({
-          def: definition,
-          id: index
-        }))
-        console.log(`Definition Data: ${JSON.stringify(defsWithIds)}`)
-        setDefinitionData(defsWithIds)
+        const data = await fetchWordData("voluminous")
+        setData(data.wordData)
+        setDefinitionData(data.definitionData)
       }
       catch (error) {
         console.error("Error fetching data: ", error)
