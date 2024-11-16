@@ -59,13 +59,13 @@ export default function Home() {
   return (
     <>
       <div className="h-screen flex flex-col items-center justify-center">
-        <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8">
-            <Word word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
+        <Word word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
+        <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
             <Definition definitions={definitionData ? definitionData : []} wordMoved={wordMovedUp}/>
         </div>
         <form onSubmit={handleSubmit}>
           <label>
-            <input ref={inputRef} defaultValue={"Hello"} className="h-8 p-2 rounded-md bg-transparent border-2 border-gray-300 text-white focus:outline-none" />
+            <input ref={inputRef} defaultValue={"Hello"} className="h-8 p-4 rounded-full bg-transparent border-2 border-gray-100 text-white focus:outline-none" />
           </label> 
         </form>
       </div>
