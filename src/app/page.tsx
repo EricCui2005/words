@@ -27,13 +27,13 @@ export default function Home() {
       try {
         const data = await fetchWordData(searchWord)
 
-        let fetchedWord = data.wordData
+        let word = data.wordData[0].meta.id
 
-        if (fetchedWord.includes(":")) {
-          fetchedWord = fetchedWord.substring(0, fetchedWord.indexOf(":"))
+        if (word.includes(":")) {
+          word = word.substring(0, word.indexOf(":"))
         }
-        
-        setData(fetchedWord)
+       
+        setData(word)
         setDefinitionData(data.definitionData)
       }
       catch (error) {
@@ -60,7 +60,7 @@ export default function Home() {
     <>
       <div className="h-screen flex flex-col items-center justify-center">
         <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8">
-            <Word word={wordData ? wordData[0]?.meta?.id : "Loading..."} moved={wordMovedUp}/>
+            <Word word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
             <Definition definitions={definitionData ? definitionData : []} wordMoved={wordMovedUp}/>
         </div>
         <form onSubmit={handleSubmit}>
