@@ -65,7 +65,7 @@ export default function Home() {
         </div>
         <form onSubmit={handleSubmit}>
           <label>
-            <input ref={inputRef} defaultValue={"Hello"} className="rounded-md" />
+            <input ref={inputRef} defaultValue={"Hello"} className="h-8 p-2 rounded-md bg-transparent border-2 border-gray-300 text-white focus:outline-none" />
           </label> 
         </form>
       </div>
