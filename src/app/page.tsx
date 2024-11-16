@@ -65,7 +65,7 @@ export default function Home() {
         </div>
         <form onSubmit={handleSubmit}>
           <label>
-            <input ref={inputRef} defaultValue={"Hello"}/>
+            <input ref={inputRef} defaultValue={"Hello"} className="rounded-md" />
           </label> 
         </form>
       </div>
