@@ -1,29 +1,39 @@
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Word from "@/components/word"
 import Definition from "@/components/definition"
 import fetchWordData from "@/utility/wordFetch"
 import { WordData } from "@/utility/types"
-import { TextField } from "@mui/material"
 
 export default function Home() {
 
   // Tracking the status of the word
   const [wordMovedUp, setMovedUp] = useState(false)
+
+  // State variables of the word and its definition data
   const [wordData, setData] = useState<[WordData]>()
   const [definitionData, setDefinitionData] = useState()
 
-  // Fetching word data once on component mount
-  // Empty dependency array ensures data is fetched only once
-  // on component mount
+  // useRef reference and searchWord state variable for word to be searched
+  const [searchWord, setSearchWord] = useState<string>("initial")
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  // Searching for new word
   useEffect(() => {
 
     // Wrapping utility word data fetching function in async function
     const fetchData = async () => {
       try {
-        const data = await fetchWordData("voluminous")
-        setData(data.wordData)
+        const data = await fetchWordData(searchWord)
+
+        let fetchedWord = data.wordData
+
+        if (fetchedWord.includes(":")) {
+          fetchedWord = fetchedWord.substring(0, fetchedWord.indexOf(":"))
+        }
+        
+        setData(fetchedWord)
         setDefinitionData(data.definitionData)
       }
       catch (error) {
@@ -31,28 +41,19 @@ export default function Home() {
       }
     }
     fetchData();
-  }, [])
+  }, [searchWord])
 
-  // Adds a new listener each time with new word wordMovedUp state
-  // useEffect(() => {
-
-  //   // Word transition logic
-  //   const wordTransition = () => {
-  //     setMovedUp(!wordMovedUp);
-  //   }
-
-  //   // Adding an event listener to detect a click anywhere on the document
-  //   document.addEventListener('click', wordTransition)
-
-  //   // Cleanup function
-  //   return () => {
-  //     document.removeEventListener('click', wordTransition)
-  //   };
-  // }, [wordMovedUp])
-
-  const handleClick = (target) => {
+  // Handling move up state of word and definition status
+  const handleClick = () => {
     setMovedUp(!wordMovedUp)
     console.log("Hello")
+  }
+  
+  // Handling fetching definition data
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    const word = inputRef?.current?.value ? inputRef.current.value : "empty"
+    setSearchWord(word)
   }
 
   return (
@@ -62,12 +63,11 @@ export default function Home() {
             <Word word={wordData ? wordData[0]?.meta?.id : "Loading..."} moved={wordMovedUp}/>
             <Definition definitions={definitionData ? definitionData : []} wordMoved={wordMovedUp}/>
         </div>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" sx={{
-    width: '300px',
-    marginTop: 2,          // converts to 16px (1 = 8px)
-    backgroundColor: '#fff',
-    borderRadius: 10,       // converts to 8px
-  }}/>
+        <form onSubmit={handleSubmit}>
+          <label>
+            <input ref={inputRef} defaultValue={"Hello"}/>
+          </label> 
+        </form>
       </div>
     </>
   )
