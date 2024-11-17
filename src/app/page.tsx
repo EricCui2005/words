@@ -6,6 +6,7 @@ import Definition from "@/components/definition"
 import fetchWordData from "@/utility/wordFetch"
 import { WordData } from "@/utility/types"
 import Hamburger from "hamburger-react"
+import Menu from "@/components/menu"
 
 export default function Home() {
 
@@ -20,6 +21,8 @@ export default function Home() {
   // useRef reference and searchWord state variable for word to be searched
   const [searchWord, setSearchWord] = useState<string>("hello")
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const [isOpen, setIsOpen] = useState(false)
 
   // Searching for new word
   useEffect(() => {
@@ -50,6 +53,11 @@ export default function Home() {
     setMovedUp(!wordMovedUp)
     console.log("Hello")
   }
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen)
+    
+  }
   
   // Handling fetching definition data
   const handleSubmit = (e: React.FormEvent) => {
@@ -60,15 +68,16 @@ export default function Home() {
 
   return (
     <>
-      <Hamburger color="white"></Hamburger>
-      <div className="h-screen flex flex-col items-center justify-center">
-        <Word word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
+      <div className="relative h-screen relative flex flex-col items-center justify-center">
+        <Menu isOpen={isOpen}/>
+        <Hamburger toggled={isOpen} onToggle={handleToggle}color="white" rounded></Hamburger>
+        <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
         <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
             <Definition definitions={definitionData ? definitionData : []} wordMoved={wordMovedUp}/>
         </div>
         <form onSubmit={handleSubmit}>
           <label>
-            <input ref={inputRef} defaultValue={""} className="h-8 p-4 rounded-full bg-transparent border border-gray-100 text-white focus:outline-none" />
+            <input ref={inputRef} defaultValue={""} className="h-8 p-4 rounded-full bg-transparent border-2 border-gray-300 text-white focus:outline-none" />
           </label> 
         </form>
       </div>
