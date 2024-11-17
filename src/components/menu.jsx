@@ -1,15 +1,4 @@
-import { useEffect } from "react"
-
 export default function Menu({ isOpen, className }) {
-
-    useEffect(() => {
-        if (isOpen) {
-            setShouldRender(true)
-        } else {
-            const timeout = setTimeout(() => setShouldRender(false), 500)
-            return () => clearTimeout(timeout)
-        }
-    }, [isOpen])
 
     return (
         <>
