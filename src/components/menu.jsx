@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
 export default function Menu({ isOpen, className }) {
-    const [shouldRender, setShouldRender] = useState(false)
 
     useEffect(() => {
         if (isOpen) {
