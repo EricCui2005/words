@@ -69,8 +69,10 @@ export default function Home() {
   return (
     <>
       <div className="relative h-screen relative flex flex-col items-center justify-center">
-        <Menu isOpen={isOpen}/>
-        <Hamburger toggled={isOpen} onToggle={handleToggle}color="white" rounded></Hamburger>
+        <Menu isOpen={isOpen} className={""}/>
+        <div className="pb-52">
+          <Hamburger toggled={isOpen} onToggle={handleToggle}color="white" rounded></Hamburger>
+        </div>
         <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
         <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
             <Definition definitions={definitionData ? definitionData : []} wordMoved={wordMovedUp}/>
