@@ -69,19 +69,19 @@ export default function Home() {
   return (
     <>
       <div className="relative h-screen relative flex flex-col items-center justify-center">
-        <Menu isOpen={isOpen} className={""}/>
-        <div className="pb-52">
-          <Hamburger toggled={isOpen} onToggle={handleToggle}color="white" rounded></Hamburger>
-        </div>
-        <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
-        <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
-            <Definition definitions={definitionData ? definitionData : []} wordMoved={wordMovedUp}/>
-        </div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <input ref={inputRef} defaultValue={""} className="h-8 p-4 rounded-full bg-transparent border-2 border-gray-300 text-white focus:outline-none" />
-          </label> 
-        </form>
+        <Hamburger toggled={isOpen} onToggle={handleToggle}color="white" rounded></Hamburger>
+        <Menu isOpen={isOpen} className={"absolute"}/>
+        <div className={`absolute h-1/2 h-screen relative flex flex-col items-center justify-center transition-opacity duration-100 ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+          <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
+          <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
+              <Definition definitions={definitionData ? definitionData : []} wordMoved={wordMovedUp}/>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <label>
+              <input ref={inputRef} defaultValue={""} className="h-8 p-4 rounded-full bg-transparent border-2 border-gray-300 text-white focus:outline-none" />
+            </label> 
+          </form>
+        </div> 
       </div>
     </>
   )
