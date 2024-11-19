@@ -1,5 +1,6 @@
 export default function Menu({ isOpen, className }) {
 
+    // Menu component
     return (
         <>
             <div className={`${className} absolute z-10 flex flex-col justify-center items-center rounded-3xl text-white w-96 h-96 bg-blue-700 transition-opacity 
