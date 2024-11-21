@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
-import { WordData } from "@/utility/types"
-import fetchDefData from "@/utility/wordFetch"
+import { ThesaurusData } from "@/utility/types"
+import fetchThesaurusData from "@/utility/thesaurusFetch"
 
 export default function useWordData(searchWord: string) {
 
-    const [wordData, setData] = useState<[WordData]>()
-    const [definitionData, setDefinitionData] = useState()
+    const [wordData, setData] = useState<[ThesaurusData]>()
+    const [thesaurusData, setThesaurusData] = useState()
 
     // Searching for new word
     useEffect(() => {
@@ -13,16 +13,16 @@ export default function useWordData(searchWord: string) {
         // Wrapping utility word data fetching function in async function
         const fetchData = async () => {
         try {
-            const data = await fetchDefData(searchWord)
+            const data = await fetchThesaurusData(searchWord)
 
             let word = data.wordData[0].meta.id
 
             if (word.includes(":")) {
-            word = word.substring(0, word.indexOf(":"))
+                word = word.substring(0, word.indexOf(":"))
             }
-        
+
             setData(word)
-            setDefinitionData(data.definitionData)
+            setThesaurusData(data.synonymData)
         }
         catch (error) {
             console.error("Error fetching data: ", error)
@@ -31,6 +31,6 @@ export default function useWordData(searchWord: string) {
         fetchData();
     }, [searchWord])
 
-    return {wordData, definitionData}
+    return {wordData, thesaurusData}
 
 }

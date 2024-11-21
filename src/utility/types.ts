@@ -3,3 +3,9 @@ export interface WordData {
         id:string
     };
 }
+
+export interface ThesaurusData {
+    meta?: {
+        id:string,
+    };
+}

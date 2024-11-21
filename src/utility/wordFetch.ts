@@ -1,4 +1,4 @@
-export default async function fetchWordData(word: string) {
+export default async function fetchDefData(word: string) {
     
     try {
         const response = await fetch(`api/definition?word=${word}`);
