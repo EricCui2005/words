@@ -9,7 +9,6 @@ import useWordData from "@/utility/useWordData"
 
 export default function Home() {
 
-
   // Word to be searched and reference to input element
   const [searchWord, setSearchWord] = useState<string>("hello")
   const inputRef = useRef<HTMLInputElement>(null)
@@ -21,24 +20,23 @@ export default function Home() {
   const [wordMovedUp, setMovedUp] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
-
-  // Handling move up state of word and definition status
-  const handleClick = () => {
-    setMovedUp(!wordMovedUp)
-    console.log("Hello")
-  }
-
-  const handleToggle = () => {
-    setIsOpen(!isOpen)
-    
-  }
-  
-  // Handling fetching definition data
+  // Handles word submission for definition fetch
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const word = inputRef?.current?.value ? inputRef.current.value : "empty"
     setSearchWord(word)
   }
+
+  // Handling element visuals
+  const handleClick = () => {
+    setMovedUp(!wordMovedUp)
+    console.log("Hello")
+  }
+  const handleToggle = () => {
+    setIsOpen(!isOpen)
+  }
+  
+  
 
   return (
     <>
