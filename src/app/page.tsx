@@ -7,7 +7,6 @@ import fetchWordData from "@/utility/wordFetch"
 import { WordData } from "@/utility/types"
 import Hamburger from "hamburger-react"
 import Menu from "@/components/menu"
-import InfiniteHorizontalScroll from "@/components/infiniteHorizontalScroll"
 
 export default function Home() {
 
@@ -72,15 +71,7 @@ export default function Home() {
       <div className="relative h-screen relative flex flex-col items-center justify-center">
         <Hamburger toggled={isOpen} onToggle={handleToggle}color="white" rounded></Hamburger>
         <Menu isOpen={isOpen} className={"absolute"}>
-          <InfiniteHorizontalScroll>
-            <p>word1</p>
-            <p>word2</p>
-            <p>word3</p>
-            <p>word4</p>
-            <p>word5</p>
-            <p>word6</p>
-            <p>word7</p>
-          </InfiniteHorizontalScroll>
+          <button>hi</button>
         </Menu>
         <div className={`absolute h-1/2 h-screen relative flex flex-col items-center justify-center transition-opacity duration-100 ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
           <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
