@@ -1,26 +1,53 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import Word from "@/components/word"
 import Definition from "@/components/definition"
+import fetchWordData from "@/utility/wordFetch"
+import { WordData } from "@/utility/types"
 import Hamburger from "hamburger-react"
 import Menu from "@/components/menu"
-import useWordData from "@/utility/useWordData"
 
-export default function Home() {
+export default function DefinitionBlock() {
 
 
-  // Word to be searched and reference to input element
+  // Tracking the status of the word
+  const [wordMovedUp, setMovedUp] = useState(false)
+
+  // State variables of the word and its definition data
+  const [wordData, setData] = useState<[WordData]>()
+  const [definitionData, setDefinitionData] = useState()
+
+  // useRef reference and searchWord state variable for word to be searched
   const [searchWord, setSearchWord] = useState<string>("hello")
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Fetched word data
-  const { wordData, definitionData } = useWordData(searchWord)
-
-  // Tracking the status of word position
-  const [wordMovedUp, setMovedUp] = useState(false)
+  // Tracking whether the menu is open
   const [isOpen, setIsOpen] = useState(false)
 
+  // Searching for new word
+  useEffect(() => {
+
+    // Wrapping utility word data fetching function in async function
+    const fetchData = async () => {
+      try {
+        const data = await fetchWordData(searchWord)
+
+        let word = data.wordData[0].meta.id
+
+        if (word.includes(":")) {
+          word = word.substring(0, word.indexOf(":"))
+        }
+       
+        setData(word)
+        setDefinitionData(data.definitionData)
+      }
+      catch (error) {
+        console.error("Error fetching data: ", error)
+      }
+    }
+    fetchData();
+  }, [searchWord])
 
   // Handling move up state of word and definition status
   const handleClick = () => {
