@@ -9,6 +9,8 @@ import SynonymBlock from "@/components/synonymBlock"
 export default function Home() {
 
   const [isOpen, setIsOpen] = useState(false)
+
+  const [blockType, setBlockType] = useState("def")
   const handleToggle = () => {
     setIsOpen(!isOpen)
   }
@@ -21,7 +23,8 @@ export default function Home() {
             <button>hi</button>
           </Menu>
           <div className={`absolute h-1/2 h-screen relative flex flex-col items-center justify-center transition-opacity duration-100 ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-            <SynonymBlock/>
+            {blockType == "def" && <DefinitionBlock/>}
+            {blockType == "syn" && <SynonymBlock/>}
           </div>
       </div>
     </>
