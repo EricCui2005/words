@@ -2,25 +2,26 @@
 
 import { useState, useRef } from "react"
 import Word from "@/components/word"
-import Synonym from "@/components/synonyms"
+import Antonym from "@/components/antonym"
 import useThesaurusData from "@/utility/useThesaurusData"
 
-export default function SynonymBlock() {
+export default function AntonymBlock({ parentSearchWord, setParentSearchWord }) {
 
     // Word to be searched and reference to input element
-    const [searchWord, setSearchWord] = useState<string>("hello")
-    const inputRef = useRef<HTMLInputElement>(null)
+    const [searchWord, setSearchWord] = useState(parentSearchWord)
+    const inputRef = useRef(null)
 
     // Fetched word data
-    const { wordData, thesaurusData }: {wordData: any, thesaurusData: any} = useThesaurusData(searchWord)
+    const { wordData, thesaurusData } = useThesaurusData(searchWord)
 
     // Tracking the status of word position
     const [wordMovedUp, setMovedUp] = useState(false)
     
     // Handles word submission for definition fetch
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         const word = inputRef?.current?.value ? inputRef.current.value : "empty"
+        setParentSearchWord(word)
         setSearchWord(word)
     }
 

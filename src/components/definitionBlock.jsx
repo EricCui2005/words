@@ -5,11 +5,11 @@ import Word from "@/components/word"
 import Definition from "@/components/definition"
 import useWordData from "@/utility/useWordData"
 
-export default function DefinitionBlock() {
+export default function DefinitionBlock({ parentSearchWord, setParentSearchWord }) {
 
     // Word to be searched and reference to input element
-    const [searchWord, setSearchWord] = useState<string>("hello")
-    const inputRef = useRef<HTMLInputElement>(null)
+    const [searchWord, setSearchWord] = useState(parentSearchWord)
+    const inputRef = useRef(null)
 
     // Fetched word data
     const { wordData, definitionData } = useWordData(searchWord)
@@ -19,9 +19,10 @@ export default function DefinitionBlock() {
     
 
     // Handles word submission for definition fetch
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         const word = inputRef?.current?.value ? inputRef.current.value : "empty"
+        setParentSearchWord(word)
         setSearchWord(word)
     }
 

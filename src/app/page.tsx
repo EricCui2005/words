@@ -10,6 +10,7 @@ import MenuButton from "@/components/menuButton"
 export default function Home() {
 
   const [isOpen, setIsOpen] = useState(false)
+  const [parentSearchWord, setParentSearchWord] = useState("hello")
 
   const [blockType, setBlockType] = useState("def")
   const handleToggle = () => {
@@ -26,8 +27,8 @@ export default function Home() {
             <MenuButton text="Antonyms" id="ant" setParentState={setBlockType} selected={blockType == "ant"}/>
           </Menu>
           <div className={`absolute h-1/2 h-screen relative flex flex-col items-center justify-center transition-opacity duration-100 ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-            {blockType == "def" && <DefinitionBlock/>}
-            {blockType == "syn" && <SynonymBlock/>}
+            {blockType == "def" && <DefinitionBlock parentSearchWord={parentSearchWord} setParentSearchWord={setParentSearchWord}/>}
+            {blockType == "syn" && <SynonymBlock parentSearchWord={parentSearchWord} setParentSearchWord={setParentSearchWord}/>}
           </div>
       </div>
     </>
