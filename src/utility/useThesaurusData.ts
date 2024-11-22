@@ -5,8 +5,6 @@ import fetchThesaurusData from "@/utility/thesaurusFetch"
 export default function useWordData(searchWord: string) {
 
     const [wordData, setData] = useState<[ThesaurusData]>()
-    const [thesaurusData, setThesaurusData] = useState()
-
     const [synonymData, setSynonymData] = useState()
     const [antonymData, setAntonymData] = useState()
 

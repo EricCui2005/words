@@ -12,7 +12,7 @@ export default function AntonymBlock({ parentSearchWord, setParentSearchWord }) 
     const inputRef = useRef(null)
 
     // Fetched word data
-    const { wordData, synonymData, antonymData } = useThesaurusData(searchWord)
+    const { wordData, antonymData } = useThesaurusData(searchWord)
 
     // Tracking the status of word position
     const [wordMovedUp, setMovedUp] = useState(false)
