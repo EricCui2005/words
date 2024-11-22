@@ -12,7 +12,7 @@ export default function SynonymBlock() {
     const inputRef = useRef<HTMLInputElement>(null)
 
     // Fetched word data
-    const { wordData, thesaurusData } = useThesaurusData(searchWord)
+    const { wordData, thesaurusData }: {wordData: any, thesaurusData: any} = useThesaurusData(searchWord)
 
     // Tracking the status of word position
     const [wordMovedUp, setMovedUp] = useState(false)
@@ -34,7 +34,7 @@ export default function SynonymBlock() {
         <>
             <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
             <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
-                <Synonym synonyms={thesaurusData ? thesaurusData[0].syn : []} wordMoved={wordMovedUp}></Synonym>
+                <Synonym synonyms={thesaurusData ? thesaurusData[0].syn.slice(0, 4) : []} wordMoved={wordMovedUp}></Synonym>
             </div>
             <form onSubmit={handleSubmit}>
                 <label>
