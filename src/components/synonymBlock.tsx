@@ -41,7 +41,6 @@ export default function SynonymBlock() {
                     <input ref={inputRef} defaultValue={""} className="h-8 p-4 rounded-full bg-transparent border-2 border-gray-300 text-white focus:outline-none" />
                 </label> 
             </form>
-            <h1>{thesaurusData ? thesaurusData : "no data"}</h1>
         </>
     )
 }
