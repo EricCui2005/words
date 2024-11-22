@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react"
 import Word from "@/components/word"
-import Antonym from "@/components/antonym"
+import Antonym from "@/components/antonyms"
 import useThesaurusData from "@/utility/useThesaurusData"
 
 export default function AntonymBlock({ parentSearchWord, setParentSearchWord }) {
@@ -12,7 +12,7 @@ export default function AntonymBlock({ parentSearchWord, setParentSearchWord }) 
     const inputRef = useRef(null)
 
     // Fetched word data
-    const { wordData, thesaurusData } = useThesaurusData(searchWord)
+    const { wordData, synonymData, antonymData } = useThesaurusData(searchWord)
 
     // Tracking the status of word position
     const [wordMovedUp, setMovedUp] = useState(false)
@@ -35,7 +35,7 @@ export default function AntonymBlock({ parentSearchWord, setParentSearchWord }) 
         <>
             <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
             <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
-                <Synonym synonyms={thesaurusData ? thesaurusData[0].syn.slice(0, 4) : []} wordMoved={wordMovedUp}></Synonym>
+                <Antonym antonyms={antonymData ? antonymData[0].ant.slice(0, 4) : []} wordMoved={wordMovedUp}></Antonym>
             </div>
             <form onSubmit={handleSubmit}>
                 <label>

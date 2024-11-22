@@ -7,6 +7,9 @@ export default function useWordData(searchWord: string) {
     const [wordData, setData] = useState<[ThesaurusData]>()
     const [thesaurusData, setThesaurusData] = useState()
 
+    const [synonymData, setSynonymData] = useState()
+    const [antonymData, setAntonymData] = useState()
+
     // Searching for new word
     useEffect(() => {
 
@@ -22,7 +25,8 @@ export default function useWordData(searchWord: string) {
             }
 
             setData(word)
-            setThesaurusData(data.synonymData)
+            setSynonymData(data.synonymData)
+            setAntonymData(data.antonymData)
         }
         catch (error) {
             console.error("Error fetching data: ", error)
@@ -31,6 +35,6 @@ export default function useWordData(searchWord: string) {
         fetchData();
     }, [searchWord])
 
-    return {wordData, thesaurusData}
+    return {wordData, synonymData, antonymData}
 
 }

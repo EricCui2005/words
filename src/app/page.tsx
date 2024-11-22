@@ -5,6 +5,7 @@ import Hamburger from "hamburger-react"
 import Menu from "@/components/menu"
 import DefinitionBlock from "@/components/definitionBlock"
 import SynonymBlock from "@/components/synonymBlock"
+import AntonymBlock from "@/components/antonymBlock"
 import MenuButton from "@/components/menuButton"
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
           <div className={`absolute h-1/2 h-screen relative flex flex-col items-center justify-center transition-opacity duration-100 ${isOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
             {blockType == "def" && <DefinitionBlock parentSearchWord={parentSearchWord} setParentSearchWord={setParentSearchWord}/>}
             {blockType == "syn" && <SynonymBlock parentSearchWord={parentSearchWord} setParentSearchWord={setParentSearchWord}/>}
+            {blockType == "ant" && <AntonymBlock parentSearchWord={parentSearchWord} setParentSearchWord={setParentSearchWord}/>}
           </div>
       </div>
     </>
