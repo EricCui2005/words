@@ -8,7 +8,6 @@ export default function MenuButton({ text, id, setParentState, selected }) {
         setParentState(id)
     }
 
-    // menu button
     return (
         <>
             <Button variant="outlined" onClick={handleClick}sx={{ width: 300, color: 'white', backgroundColor: selected ? faceBookBlue : "" }}>
