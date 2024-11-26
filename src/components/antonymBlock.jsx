@@ -13,6 +13,7 @@ export default function AntonymBlock({ parentSearchWord, setParentSearchWord }) 
 
     // Fetched word data
     const { wordData, antonymData } = useThesaurusData(searchWord)
+    console.log(`Antonym Data: ${antonymData}`)
 
     // Tracking the status of word position
     const [wordMovedUp, setMovedUp] = useState(false)
@@ -35,7 +36,7 @@ export default function AntonymBlock({ parentSearchWord, setParentSearchWord }) 
         <>
             <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
             <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
-                <Antonym antonyms={antonymData ? antonymData[0].ant.slice(0, 4) : []} wordMoved={wordMovedUp}></Antonym>
+                <Antonym antonyms={(antonymData && antonymData.length != 0) ? antonymData[0].ant.slice(0, 4) : []} wordMoved={wordMovedUp}></Antonym>
             </div>
             <form onSubmit={handleSubmit}>
                 <label>

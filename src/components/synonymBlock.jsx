@@ -35,7 +35,7 @@ export default function SynonymBlock({ parentSearchWord, setParentSearchWord }) 
         <>
             <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
             <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
-                <Synonym synonyms={synonymData ? synonymData[0].syn.slice(0, 4) : []} wordMoved={wordMovedUp}></Synonym>
+                <Synonym synonyms={(synonymData && synonymData.length != 0) ? synonymData[0].syn.slice(0, 4) : []} wordMoved={wordMovedUp}></Synonym>
             </div>
             <form onSubmit={handleSubmit}>
                 <label>
