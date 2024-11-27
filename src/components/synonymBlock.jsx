@@ -33,6 +33,7 @@ export default function SynonymBlock({ parentSearchWord, setParentSearchWord }) 
     
     return (
         
+        // Menu
         <>
             <Word className={"absolute z-0"} word={wordData ? wordData : "Loading..."} moved={wordMovedUp}/>
             <div onClick={handleClick} className="flex flex-col items-center justify-center gap-8 h-1/3 w-3/4 mb-8">
